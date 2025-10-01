@@ -7,11 +7,14 @@ import persondigitalassistentapp.view.EdicionView;
 import persondigitalassistentapp.view.EditarContactoView;
 import persondigitalassistentapp.view.EliminarContactoView;
 import persondigitalassistentapp.view.FirstView;
+import persondigitalassistentapp.view.InicioSeccionView;
 import persondigitalassistentapp.view.ListaDeContactosView;
+import persondigitalassistentapp.view.LoginView;
 import persondigitalassistentapp.view.MenuContactosView;
 import persondigitalassistentapp.view.MenuRegistroView;
 import persondigitalassistentapp.view.NuevoContactoView;
 import persondigitalassistentapp.view.PersonalDigitalAssistentView;
+import persondigitalassistentapp.view.RegistrarseView;
 
 public class PersonalDigitalAssistentController {
     
@@ -24,6 +27,9 @@ public class PersonalDigitalAssistentController {
     private static MenuContactosView menuContactosView = new MenuContactosView();
     private static MenuRegistroView menuRegistroView = new MenuRegistroView();
     private static EdicionView edicionView = new EdicionView();
+    private static LoginView loginView = new LoginView();
+    private static RegistrarseView registrarseView = new RegistrarseView();
+    private static InicioSeccionView inicioSeccion = new InicioSeccionView();
     private static PersonalDigitalAssistentView personalDigitalAssistentView = new PersonalDigitalAssistentView();
    
    public static void onEdicionView(){
@@ -31,6 +37,28 @@ public class PersonalDigitalAssistentController {
         edicionView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         edicionView.setVisible(true);
    
+   
+   }
+   public static void onLogin(){
+   
+       loginView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       loginView.setVisible(true);
+   
+   
+   }
+
+   public static void onInicioSeccion(){
+       
+       inicioSeccion.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+       inicioSeccion.setVisible(true);
+       
+   }
+   
+   public static void onRegistrarse(){
+   
+   
+       registrarseView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+       registrarseView.setVisible(true);
    
    }
     
@@ -47,12 +75,10 @@ public class PersonalDigitalAssistentController {
         menuRegistroView.setVisible(true);
     
     }
-    
-    
-    
+
     public static void onFirstView(){
+        firstView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
-        firstView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         firstView.setVisible(true);
     
     
@@ -75,6 +101,7 @@ public class PersonalDigitalAssistentController {
     public static void onEliminarContactoView(){
     
         eliminarContactoView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        eliminarContactoView.mostrarDatos();
         eliminarContactoView.setVisible(true);
     
     }
@@ -101,6 +128,25 @@ public class PersonalDigitalAssistentController {
     
     }
     
+    public static void offInicioSeccion(){
+    
+        inicioSeccion.setVisible(false);
+    
+    }
+    
+    public static void offRegistrarse(){
+    
+        registrarseView.setVisible(false);
+    
+    }
+    
+    public static void offLogin(){
+    
+        loginView.setVisible(false);
+    
+    
+    }
+    
     public static void offFirstView(){
     
         firstView.setVisible(false);
@@ -124,11 +170,9 @@ public class PersonalDigitalAssistentController {
     
     }
      public static void offEdicionView(){
-   
-     
+
         menuContactosView.setVisible(false);
-   
-   
+
    }
     
     public static void offListaDeContatosView(){
@@ -159,4 +203,4 @@ public class PersonalDigitalAssistentController {
         personalDigitalAssistentView.setVisible(false);
     
     }
-}
+   }

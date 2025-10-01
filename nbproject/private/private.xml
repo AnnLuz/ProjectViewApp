@@ -4,12 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/alvar/OneDrive/Escritorio/IngenieriaEnSistemas/paradigmasDeProgramacion/proyectos/PersonDigitalAssistentApp/src/persondigitalassistentapp/PersonDigitalAssistentApp.java</file>
+            <file>file:/C:/Users/alvar/OneDrive/Escritorio/IngenieriaEnSistemas/paradigmasDeProgramacion/proyectos/PersonDigitalAssistentApp/src/persondigitalassistentapp/view/RegistrarseView.java</file>
             <file>file:/C:/Users/alvar/OneDrive/Escritorio/IngenieriaEnSistemas/paradigmasDeProgramacion/proyectos/PersonDigitalAssistentApp/src/persondigitalassistentapp/controller/PersonalDigitalAssistentController.java</file>
-            <file>file:/C:/Users/alvar/OneDrive/Escritorio/IngenieriaEnSistemas/paradigmasDeProgramacion/proyectos/PersonDigitalAssistentApp/src/persondigitalassistentapp/view/ListaDeContactosView.java</file>
-            <file>file:/C:/Users/alvar/OneDrive/Escritorio/IngenieriaEnSistemas/paradigmasDeProgramacion/proyectos/PersonDigitalAssistentApp/src/persondigitalassistentapp/view/NuevoContactoView.java</file>
-            <file>file:/C:/Users/alvar/OneDrive/Escritorio/IngenieriaEnSistemas/paradigmasDeProgramacion/proyectos/PersonDigitalAssistentApp/src/persondigitalassistentapp/model/Contacto.java</file>
-            <file>file:/C:/Users/alvar/OneDrive/Escritorio/IngenieriaEnSistemas/paradigmasDeProgramacion/proyectos/PersonDigitalAssistentApp/src/persondigitalassistentapp/view/MenuRegistroView.java</file>
-            <file>file:/C:/Users/alvar/OneDrive/Escritorio/IngenieriaEnSistemas/paradigmasDeProgramacion/proyectos/PersonDigitalAssistentApp/src/persondigitalassistentapp/view/FirstView.java</file>
+            <file>file:/C:/Users/alvar/OneDrive/Escritorio/IngenieriaEnSistemas/paradigmasDeProgramacion/proyectos/PersonDigitalAssistentApp/src/persondigitalassistentapp/view/InicioSeccionView.java</file>
+            <file>file:/C:/Users/alvar/OneDrive/Escritorio/IngenieriaEnSistemas/paradigmasDeProgramacion/proyectos/PersonDigitalAssistentApp/src/persondigitalassistentapp/main/PersonalDigitalAssistentMain.java</file>
+            <file>file:/C:/Users/alvar/OneDrive/Escritorio/IngenieriaEnSistemas/paradigmasDeProgramacion/proyectos/PersonDigitalAssistentApp/src/persondigitalassistentapp/model/Login.java</file>
         </group>
     </open-files>
 </project-private>

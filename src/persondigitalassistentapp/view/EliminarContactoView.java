@@ -4,7 +4,10 @@
  */
 package persondigitalassistentapp.view;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import persondigitalassistentapp.controller.PersonalDigitalAssistentController;
+import persondigitalassistentapp.model.Contacto;
 
 /**
  *
@@ -72,10 +75,20 @@ public class EliminarContactoView extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         botonAceptar.setBackground(new java.awt.Color(0, 153, 153));
-        botonAceptar.setText("Aceptar");
+        botonAceptar.setText("Eliminar");
+        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAceptarActionPerformed(evt);
+            }
+        });
 
         botonCancelar.setBackground(new java.awt.Color(0, 153, 153));
         botonCancelar.setText("Cancelar");
@@ -243,6 +256,40 @@ public class EliminarContactoView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_botonVisualizarActionPerformed
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        filaEditar = jTable1.getSelectedRow();
+        Contacto c;
+        
+        
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
+        if(filaEditar !=-1){
+           Contacto.getContactos().remove(filaEditar);
+           
+           JOptionPane.showMessageDialog(this,
+                   "El contacto fue eliminado con exito!",
+                   "Eliminación procesada", HEIGHT);
+           
+           PersonalDigitalAssistentController.offEliminarContactoView();
+           PersonalDigitalAssistentController.onFirstView();
+        }
+    }//GEN-LAST:event_botonAceptarActionPerformed
+
+    public void mostrarDatos(){
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.setRowCount(0); // Limpia la tabla
+
+        System.out.println(Contacto.getContactos());
+        for (Contacto c : Contacto.getContactos()) {
+            modelo.addRow(new Object[]{
+                c.getId(),
+                c.getNombre(),
+                c.getEmail(),
+                c.getTelefono()
+            });
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -278,6 +325,7 @@ public class EliminarContactoView extends javax.swing.JFrame {
         });
     }
 
+    int filaEditar;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu BotonContactos;
     private javax.swing.JMenu BotonMenu;

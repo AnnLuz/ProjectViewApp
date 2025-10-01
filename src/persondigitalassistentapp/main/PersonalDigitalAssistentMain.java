@@ -12,7 +12,7 @@ public class PersonalDigitalAssistentMain {
     public void MenuContacto(){
     
     
-        PersonalDigitalAssistentController.onFirstView();
+        PersonalDigitalAssistentController.onLogin();
     
     }
     
