@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 
 public class Contacto {
-    private static int contadorId = 1;
+
     private Integer id;
     private String nombre;
     private String email;
@@ -13,7 +13,14 @@ public class Contacto {
     private static ArrayList<Contacto> contactos = new ArrayList<>();
 
     public Contacto(String nombre, String email, String telefono) {
-        this.id = contadorId++;
+        this.id = id;
+        this.nombre = nombre;
+        this.email = email;
+        this.telefono = telefono;
+    }
+    
+    public Contacto(int id, String nombre, String email, String telefono) {
+        this.id = id;
         this.nombre = nombre;
         this.email = email;
         this.telefono = telefono;
@@ -80,6 +87,8 @@ public class Contacto {
     public static Contacto verContacto(int id){
         return contactos.get(id);
     }
+    
+    
     
     
     

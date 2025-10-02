@@ -4,9 +4,12 @@
  */
 package persondigitalassistentapp.view;
 
+import java.util.List;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import persondigitalassistentapp.controller.PersonalDigitalAssistentController;
+import persondigitalassistentapp.cruddata.PersonalDigitalAssistentDao;
 import persondigitalassistentapp.model.Contacto;
 
 /**
@@ -33,10 +36,11 @@ public class BuscarContactoView extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtPantalla = new javax.swing.JTextField();
+        txtPantallaNombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        botonBuscar2 = new javax.swing.JButton();
         botonSalir = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         botonMenu1 = new javax.swing.JMenu();
         botonContactos1 = new javax.swing.JMenu();
@@ -57,18 +61,21 @@ public class BuscarContactoView extends javax.swing.JFrame {
         jLabel1.setText("Busqueda");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Email");
+        jLabel2.setText("Nombre");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setText("Ingrese el email del contacto que desea buscar.");
-
-        botonBuscar2.setBackground(new java.awt.Color(204, 102, 255));
-        botonBuscar2.setText("Buscar");
-        botonBuscar2.addActionListener(new java.awt.event.ActionListener() {
+        txtPantallaNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonBuscar2ActionPerformed(evt);
+                txtPantallaNombreActionPerformed(evt);
             }
         });
+        txtPantallaNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPantallaNombreKeyReleased(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setText("Ingrese el nombre del contacto que desea buscar.");
 
         botonSalir.setBackground(new java.awt.Color(204, 102, 255));
         botonSalir.setText("Salir");
@@ -77,6 +84,24 @@ public class BuscarContactoView extends javax.swing.JFrame {
                 botonSalirActionPerformed(evt);
             }
         });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "id", "Nombre", "Email", "Telefono"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
 
         jMenuBar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 102, 255)));
 
@@ -157,40 +182,39 @@ public class BuscarContactoView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(156, 156, 156)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(61, 61, 61)
-                            .addComponent(botonBuscar2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(27, 27, 27)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtPantalla, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(85, Short.MAX_VALUE))
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtPantallaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(154, 154, 154)
+                        .addComponent(jLabel1)))
+                .addContainerGap(21, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(154, 154, 154))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(34, 34, 34)
+                .addGap(58, 58, 58)
                 .addComponent(jLabel3)
-                .addGap(51, 51, 51)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPantalla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(82, 82, 82)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(botonBuscar2, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(botonSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(82, Short.MAX_VALUE))
+                    .addComponent(jLabel2)
+                    .addComponent(txtPantallaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
 
         pack();
@@ -240,87 +264,30 @@ public class BuscarContactoView extends javax.swing.JFrame {
         PersonalDigitalAssistentController.onFirstView();
     }//GEN-LAST:event_botonSalirActionPerformed
 
-    private void botonBuscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscar2ActionPerformed
-        
-        String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
-        Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
-        email = txtPantalla.getText();
-        if(email != null & !(email.isEmpty())){
-        
-            if(EMAIL_PATTERN.matcher(email).matches()){
-                
-                
-                id = Contacto.searchContacto(email);
-                if(id >=0){
-                    Contacto cont = Contacto.verContacto(id);
-                
-                    int opcion = JOptionPane.showConfirmDialog(
-                        null,
-                        "¿Es este el email del contacto?\n\n" + email,
-                        "Verificar email",
-                        JOptionPane.OK_CANCEL_OPTION,
-                        JOptionPane.INFORMATION_MESSAGE
-                    );
+    private void txtPantallaNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPantallaNombreActionPerformed
 
-                // Manejar la respuesta del usuario
-                    if (opcion == JOptionPane.OK_OPTION) {
-                        String datosDeContacto =  "<html>Nombre:"+ cont.getNombre()+"<br>"
-                        + "Email:"+cont.getEmail()+"<br>"
-                        + "Teléfono:"+ cont.getTelefono()+"<br>";
-                        JOptionPane.showMessageDialog(
-                            null,
-                            "Has aceptado el email: " + email,
-                            "Confirmación",
-                            JOptionPane.INFORMATION_MESSAGE
-                        );
-                        
-                        JOptionPane.showMessageDialog(
-                                null, datosDeContacto, "Detalles", 
-                                JOptionPane.INFORMATION_MESSAGE
-                        );
-                        
-                    } else{
-                        JOptionPane.showMessageDialog(
-                           null,
-                           "Has cancelado la selección.",
-                           "Operación cancelada",
-                           JOptionPane.WARNING_MESSAGE
-                        );
-                    }
-                }else{
-                    
-                     JOptionPane.showMessageDialog(
-                         
-                        this,
-                        "Email no encontrado" ,
-                        "Intente nuevamente.\n",
-                        JOptionPane.INFORMATION_MESSAGE
-                    );
-                    
-                
-                }  
-                email="";
-                txtPantalla.setText("");
-            }
-        }else{
-        
-        
-            JOptionPane.showMessageDialog(
-                         
-                    this,
-                    "Email no ingresado" ,
-                    "Ingrese el email.\n",
-                    JOptionPane.WARNING_MESSAGE
-                );
-                email = "";
-                txtPantalla.setText("");
-           
 
+        
+       
+    }//GEN-LAST:event_txtPantallaNombreActionPerformed
+
+    private void txtPantallaNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPantallaNombreKeyReleased
+    
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.setRowCount(0);
+
+        String texto = txtPantallaNombre.getText();          
+        List<Contacto> resultados = PersonalDigitalAssistentDao.buscarPorNombre(texto);
+
+        for (Contacto c : resultados) {
+            modelo.addRow(new Object[]{
+               c.getId(),
+               c.getNombre(),
+               c.getEmail(),
+               c.getTelefono()
+            });
         }
-        
-        
-        
-    }//GEN-LAST:event_botonBuscar2ActionPerformed
+    }//GEN-LAST:event_txtPantallaNombreKeyReleased
 
     /**
      * @param args the command line arguments
@@ -364,7 +331,6 @@ public class BuscarContactoView extends javax.swing.JFrame {
     private javax.swing.JMenu botonAcercaDe1;
     private javax.swing.JMenu botonAyuda1;
     private javax.swing.JMenuItem botonBuscar1;
-    private javax.swing.JButton botonBuscar2;
     private javax.swing.JMenu botonContactos1;
     private javax.swing.JMenuItem botonEditar1;
     private javax.swing.JMenuItem botonEliminar;
@@ -378,6 +344,8 @@ public class BuscarContactoView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JTextField txtPantalla;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField txtPantallaNombre;
     // End of variables declaration//GEN-END:variables
 }

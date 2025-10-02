@@ -4,9 +4,12 @@
  */
 package persondigitalassistentapp.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import persondigitalassistentapp.controller.PersonalDigitalAssistentController;
+import persondigitalassistentapp.cruddata.PersonalDigitalAssistentDao;
 import persondigitalassistentapp.model.Contacto;
 
 /**
@@ -211,7 +214,7 @@ public class EditarContactoView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    int filaEditar;
+    int fila = 0;
     
     private void botonRegistrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrar1ActionPerformed
         
@@ -251,15 +254,16 @@ public class EditarContactoView extends javax.swing.JFrame {
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        filaEditar = jTable1.getSelectedRow();
-        Contacto c;
+        fila = jTable1.getSelectedRow();
+
+        if(fila !=-1){
         
-        if(filaEditar !=-1){
-        
-           c = Contacto.verContacto(filaEditar);
-           Contacto.getContactos().remove(filaEditar);
-           Contacto.addContacto(c);
+            
+            int id = (int) jTable1.getValueAt(fila, 0);   
+            System.out.println(id);
+            Contacto c = PersonalDigitalAssistentDao.buscarPorId(id);
            
+            Contacto.addContacto(c);
 
         }
     }//GEN-LAST:event_jTable1MouseClicked
@@ -267,10 +271,11 @@ public class EditarContactoView extends javax.swing.JFrame {
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
         
         
-        if(filaEditar !=-1){
+        if(fila !=-1){
         
             PersonalDigitalAssistentController.onEdicionView();
             PersonalDigitalAssistentController.offEditarContactoView();
+            fila = -1;
             
         
         }else{
@@ -285,8 +290,10 @@ public class EditarContactoView extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setRowCount(0); // Limpia la tabla
 
-        System.out.println(Contacto.getContactos());
-        for (Contacto c : Contacto.getContactos()) {
+        List<Contacto> contactos = new ArrayList<>();
+        contactos = PersonalDigitalAssistentDao.getAll();
+    
+        for (Contacto c : contactos) {
             modelo.addRow(new Object[]{
                 c.getId(),
                 c.getNombre(),

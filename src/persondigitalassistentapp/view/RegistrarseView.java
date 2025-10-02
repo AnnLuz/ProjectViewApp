@@ -6,6 +6,7 @@ package persondigitalassistentapp.view;
 
 import javax.swing.JOptionPane;
 import persondigitalassistentapp.controller.PersonalDigitalAssistentController;
+import persondigitalassistentapp.cruddata.PersonalDigitalAssistentDao;
 import persondigitalassistentapp.model.Login;
 
 /**
@@ -158,6 +159,7 @@ public class RegistrarseView extends javax.swing.JFrame {
                             "Datos registrados con exito!", 
                             JOptionPane.INFORMATION_MESSAGE);
                         Login.addUsuario(new Login (usuario,contrasenia));
+                        PersonalDigitalAssistentDao.createUsuario(new Login (usuario,contrasenia));
                         txtPantallaUsuario.setText("");
                         txtPantallaContrasenia.setText("");
                         PersonalDigitalAssistentController.onLogin();

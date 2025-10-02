@@ -6,6 +6,7 @@ package persondigitalassistentapp.view;
 
 import javax.swing.JOptionPane;
 import persondigitalassistentapp.controller.PersonalDigitalAssistentController;
+import persondigitalassistentapp.cruddata.PersonalDigitalAssistentDao;
 import persondigitalassistentapp.model.Login;
 
 /**
@@ -121,25 +122,28 @@ public class InicioSeccionView extends javax.swing.JFrame {
         
             if(!(usuario.isEmpty()) && !(contrasenia.isEmpty())){
                 
-                for(Login l : Login.getUsuarios()){
+                //for(Login l : Login.getUsuarios()){
                 
                 
-                    if(l.getUsuario().equals(usuario) && l.getContraseña().equals(contrasenia)){
-                    
-                        JOptionPane.showMessageDialog(this,
+                    //if(l.getUsuario().equals(usuario) && l.getContraseña().equals(contrasenia)){
+                        boolean esValido = PersonalDigitalAssistentDao.validarLogin(usuario, contrasenia);
+                        if(esValido){
+                        
+                            JOptionPane.showMessageDialog(this,
                             "Usuario y contraseña Validos!",
                             "Iniciando sección..." , 
                             JOptionPane.INFORMATION_MESSAGE);
                         
-                        txtPantallaUsuario.setText("");
-                        txtPantallaContraseña.setText("");
-                        bandera = 1;
-                        PersonalDigitalAssistentController.onFirstView();
-                        PersonalDigitalAssistentController.offInicioSeccion();
+                            txtPantallaUsuario.setText("");
+                            txtPantallaContraseña.setText("");
+                            bandera = 1;
+                            PersonalDigitalAssistentController.onFirstView();
+                            PersonalDigitalAssistentController.offInicioSeccion();
 
-                    }
+                        }
+                    //}
                     
-                }
+                //}
                 if(bandera == 0){
                     
                     JOptionPane.showMessageDialog(this,

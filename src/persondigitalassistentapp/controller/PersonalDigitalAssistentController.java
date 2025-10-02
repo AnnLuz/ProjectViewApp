@@ -110,7 +110,7 @@ public class PersonalDigitalAssistentController {
     
         
         listaDeContactosView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        listaDeContactosView.mostrarDatos();
+     
         listaDeContactosView.setVisible(true);
     }
     

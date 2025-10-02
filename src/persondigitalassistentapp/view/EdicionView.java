@@ -6,6 +6,7 @@ package persondigitalassistentapp.view;
 
 import javax.swing.JOptionPane;
 import persondigitalassistentapp.controller.PersonalDigitalAssistentController;
+import persondigitalassistentapp.cruddata.PersonalDigitalAssistentDao;
 import persondigitalassistentapp.model.Contacto;
 
 /**
@@ -199,43 +200,63 @@ public class EdicionView extends javax.swing.JFrame {
         int i = 0;
         
         if(!(nombre.isEmpty())){
-        
-           
+
            Contacto.getContactos().get(Contacto.getContactos().size() - 1).setNombre(nombre);
+           Contacto c = Contacto.getContactos().get(Contacto.getContactos().size() - 1);
            
-           JOptionPane.showMessageDialog(
+           boolean esValido = PersonalDigitalAssistentDao.update(c);
+           if(esValido){
+               
+               JOptionPane.showMessageDialog(
                    this,
                    "Nombre editado con exito!", 
                    "Edicion procesado",
                    JOptionPane.INFORMATION_MESSAGE);
            
-           txtPantallaNombre.setText("");
-           i++;
+                txtPantallaNombre.setText("");
+                i++;
+           }
+           
+           
         
         }else if(!(email.isEmpty())){
         
            Contacto.getContactos().get(Contacto.getContactos().size()-1).setEmail(email);
-           JOptionPane.showMessageDialog(
+           Contacto c = Contacto.getContactos().get(Contacto.getContactos().size() - 1);
+           boolean esValido = PersonalDigitalAssistentDao.update(c);
+           if(esValido){
+           
+               JOptionPane.showMessageDialog(
                    this,
                    "Email editado con exito!", 
                    "Edicion procesado",
                    JOptionPane.INFORMATION_MESSAGE);
-            txtPantallaEmail.setText("");
+                txtPantallaEmail.setText("");
             
 
-            i++;
+                i++;
+           
+           
+           }
+           
         
         }else if(!(telefono.isEmpty())){
         
             Contacto.getContactos().get(Contacto.getContactos().size()-1).setTelefono(telefono);
-            JOptionPane.showMessageDialog(
+            Contacto c = Contacto.getContactos().get(Contacto.getContactos().size() - 1);
+           boolean esValido = PersonalDigitalAssistentDao.update(c);
+           if(esValido){
+           
+               JOptionPane.showMessageDialog(
                    this,
                    "Teléfono editado con exito!", 
                    "Edicion procesado",
                    JOptionPane.INFORMATION_MESSAGE);
         
-            txtPantallaTelefono.setText("");
-            i++;
+                txtPantallaTelefono.setText("");
+                i++;
+           }
+            
         
         }else if(nombre.isEmpty() && telefono.isEmpty() && telefono.isEmpty() ){
         

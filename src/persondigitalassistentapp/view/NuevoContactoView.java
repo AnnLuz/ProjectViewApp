@@ -7,6 +7,7 @@ package persondigitalassistentapp.view;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import persondigitalassistentapp.controller.PersonalDigitalAssistentController;
+import persondigitalassistentapp.cruddata.PersonalDigitalAssistentDao;
 import persondigitalassistentapp.model.Contacto;
 
 /**
@@ -259,21 +260,25 @@ public class NuevoContactoView extends javax.swing.JFrame {
                 if(EMAIL_PATTERN.matcher(email).matches()){
                     
                     if(telefono.matches(PHONE_REGEX)){
-                        Contacto.addContacto(new Contacto(nombre,email,telefono));
-                        System.out.println(Contacto.getContactos());
-                        JOptionPane.showMessageDialog(
-                        this,
-                        "Proceso exitoso" ,
-                        "Los datos ingresados fueron registrados.\n",
-                        JOptionPane.INFORMATION_MESSAGE
-                        );
+                        
+                        boolean esValido = PersonalDigitalAssistentDao.create(new Contacto(nombre,email,telefono));
+                        if(esValido){
+                        
+                            JOptionPane.showMessageDialog(
+                               this,
+                               "Proceso exitoso" ,
+                               "Los datos ingresados fueron registrados.\n",
+                               JOptionPane.INFORMATION_MESSAGE
+                               );
                     
-                        nombre = "";
-                        email = "";
-                        telefono = "";
-                        txtPantallaNombre.setText("");
-                        txtPantallaEmail.setText("");
-                        txtPantallaTelefono.setText("");
+                               nombre = "";
+                               email = "";
+                               telefono = "";
+                               txtPantallaNombre.setText("");
+                               txtPantallaEmail.setText("");
+                               txtPantallaTelefono.setText("");
+                        }
+                        
                     }else{
                     
                         JOptionPane.showMessageDialog(

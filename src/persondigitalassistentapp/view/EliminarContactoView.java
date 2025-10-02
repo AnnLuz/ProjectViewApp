@@ -4,9 +4,12 @@
  */
 package persondigitalassistentapp.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import persondigitalassistentapp.controller.PersonalDigitalAssistentController;
+import persondigitalassistentapp.cruddata.PersonalDigitalAssistentDao;
 import persondigitalassistentapp.model.Contacto;
 
 /**
@@ -214,6 +217,7 @@ public class EliminarContactoView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
+    int id;
 
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
         PersonalDigitalAssistentController.onNuevoContactoView();
@@ -258,14 +262,13 @@ public class EliminarContactoView extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         filaEditar = jTable1.getSelectedRow();
-        Contacto c;
-        
-        
+        id = (int) jTable1.getValueAt(filaEditar, 0);
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
         if(filaEditar !=-1){
-           Contacto.getContactos().remove(filaEditar);
+          
+           PersonalDigitalAssistentDao.delete(id);
            
            JOptionPane.showMessageDialog(this,
                    "El contacto fue eliminado con exito!",
@@ -280,8 +283,10 @@ public class EliminarContactoView extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setRowCount(0); // Limpia la tabla
 
-        System.out.println(Contacto.getContactos());
-        for (Contacto c : Contacto.getContactos()) {
+        List<Contacto> contactos = new ArrayList<>();
+        contactos = PersonalDigitalAssistentDao.getAll();
+       
+        for (Contacto c : contactos) {
             modelo.addRow(new Object[]{
                 c.getId(),
                 c.getNombre(),
